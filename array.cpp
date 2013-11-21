@@ -83,7 +83,73 @@ Array::~Array()
     vars.sort();
     vars.unique();
     return vars;
-}
+ }
+
+ void Array::logicArray(const int _value)
+ {
+     for(int i=0; i<width; i++)
+         for(int j=0; j<height; j++){
+             if (p_array[i][j].value==_value)
+                 p_array[i][j].valueBool=true;
+             else
+                 p_array[i][j].valueBool=false;
+         }
+ }
+
+ int Array::sumVar(int _value)
+ {
+    int sum=0;
+    for(int i=0; i<width; i++)
+        for(int j=0; j<height; j++)
+            if (p_array[i][j].value==_value){
+                sum+=1;
+            }
+    return sum;
+ }
+
+ bool Array::sumstr(int ind_x)
+ {
+     bool sum;
+     for(int j=0; j<height; j++)
+         sum +=p_array[ind_x][j].valueBool;
+     return sum;
+ }
+
+ // найти первый встречающийся элемент (нужно оптимизировать)
+ // вернет номер строки, в которой находится эл.
+ int Array::findFirstElem()
+ {
+     int value;
+     for(int i=0; i<width; i++)
+         if (sumstr(i) == 0) continue;
+          else{value=i; break;}
+     return value;
+ }
+// вернет позицию первого эл. в строки X
+ int Array::findFirstElem(int x)
+ {
+   int value;
+   for(int j=0; j<height; j++)
+     if (p_array[x][j].valueBool == true) {value=j; break;}
+   return value;
+ }
+// возвращает самый последний связной эл. в строке, относительно эл.-Y
+ int Array::findFirstElem(int x, int y)
+ {
+     int value;
+     for(int j=y; y>=0; j--)
+      if (p_array[x][j].valueBool == false) {value = j+1; break;}
+     return value;
+ }
+ void Array::syncRelatedArray()
+ {
+     for(int i=0; i<width; i++)
+         for(int j=0; j<height; j++)
+             if(p_array[i][j].Used == true){
+                 p_array[i][j].valueBool=false;
+                 p_array[i][j].Used=false;
+             }
+ }
 void Array::print() const
 {
     cout << "matrix:\n";
@@ -101,3 +167,37 @@ void Array::print() const
         cout << "\n";
     }
 }
+
+void Array::printArray() const
+{
+    cout << "matrix:\n";
+    for(int i=0; i<width; i++){
+        for(int j=0; j<height; j++){
+            cout << p_array[i][j].value<< " | ";
+        }
+        cout << "\n";
+    }
+}
+
+void Array::printLogicArray() const
+{
+    cout << "logic_matrix:\n";
+    for(int i=0; i<width; i++){
+        for(int j=0; j<height; j++){
+            cout << p_array[i][j].valueBool<< " | ";
+        }
+        cout << "\n";
+    }
+}
+
+void Array::printRelatedArray() const
+{
+    cout << "related_matrix:\n";
+    for(int i=0; i<width; i++){
+        for(int j=0; j<height; j++){
+            cout << p_array[i][j].Used<< " | ";
+        }
+        cout << "\n";
+    }
+}
+

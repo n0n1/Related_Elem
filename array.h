@@ -27,6 +27,17 @@ public:
     void setUsElem(int ind_x, int ind_y, bool _value);
     // найти все уникальные
     list<int> findVariableAll();
+    // первый положительный эл.
+    // логический массив относительно переменной
+    void logicArray(const int _value);
+    // кол-во лог. эл. переменной
+    int sumVar(int _value);
+    // логическая сумма | 0 - нет эл. 1 - есть эл.
+    bool sumstr(int ind_x);
+    int findFirstElem();
+    int findFirstElem(int x);
+    int findFirstElem(int x, int y);
+    void syncRelatedArray();
     // кол-во эл. матрицы
     int sizeArray() const {return width*height;}
     //высота [y]
@@ -35,6 +46,9 @@ public:
     int sizeWidth() const {return width;}
 
     void print() const;
+    void printArray() const;
+    void printLogicArray() const;
+    void printRelatedArray() const;// связные элементы
 protected:
     static const int DefaultArraySize = 4;
     int width,height; // [x,y]

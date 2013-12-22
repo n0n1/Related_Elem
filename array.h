@@ -44,7 +44,11 @@ public:
     int sizeHeight() const {return height;}
     // ширина [x]
     int sizeWidth() const {return width;}
-
+    //шаг вверх
+    int stepUp(int x, int y);
+    //шаг вправо
+    int stepRight(int x, int y);
+    bool isDownElem(int x, int y);
     void print() const;
     void printArray() const;
     void printLogicArray() const;

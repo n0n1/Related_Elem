@@ -73,6 +73,7 @@ Array::~Array()
      p_array[ind_x][ind_y].Used= _value;
  }
 
+//найти все различные переменные
  list<int> Array::findVariableAll()
  {
      list<int> vars;
@@ -85,6 +86,7 @@ Array::~Array()
     return vars;
  }
 
+// создаст логическую матрицу для эл-та _value
  void Array::logicArray(const int _value)
  {
      for(int i=0; i<width; i++)
@@ -95,7 +97,7 @@ Array::~Array()
                  p_array[i][j].valueBool=false;
          }
  }
-
+// вернет кол-во (сумму вхождений) переменной _value в матрицу.
  int Array::sumVar(int _value)
  {
     int sum=0;
@@ -149,6 +151,51 @@ Array::~Array()
                  p_array[i][j].valueBool=false;
                  p_array[i][j].Used=false;
              }
+ }
+
+ // передается позиция текущего элемента.
+ int Array::stepUp(int x, int y)
+ {
+     int sum = 0;
+     for(int i=x; i>=0; i=i-1)
+         if(p_array[i][y].valueBool == true){
+           if(p_array[i][y].Used == false){
+                sum++;
+                p_array[i][y].Used=true;
+           }
+         }else break;
+     return sum;
+ }
+
+ // передается позиция текущего элемента.
+ int Array::stepRight(int x, int y)
+ {
+    int sum = 0;
+    for(int i=y; i<width; i++)
+        if(p_array[x][i].valueBool == true){
+          sum += stepUp(x,i);
+          if(p_array[x][i].Used == false){
+                sum++;
+                p_array[x][i].Used=true;
+          }
+        }else break;
+    return sum;
+ }
+// необходимо чтоб эл. A[x][y] был Used, иначе вернет false
+ bool Array::isDownElem(int x,int y)
+ {
+     bool flag=false;
+     for(int i=y; i<width; i++)
+         if(p_array[x][i].Used == true){
+             if((x+1) != height){
+                 if(p_array[x][i].valueBool == p_array[x+1][i].valueBool ){
+                     flag=true;
+                     return flag;
+                     break;
+                 }
+             } else break;
+         } else break;
+    return flag;
  }
 void Array::print() const
 {

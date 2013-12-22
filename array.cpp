@@ -171,7 +171,7 @@ Array::~Array()
  int Array::stepRight(int x, int y)
  {
     int sum = 0;
-    for(int i=y; i<width; i++)
+    for(int i=y; i<height; i++)
         if(p_array[x][i].valueBool == true){
           sum += stepUp(x,i);
           if(p_array[x][i].Used == false){
@@ -185,9 +185,9 @@ Array::~Array()
  bool Array::isDownElem(int x,int y)
  {
      bool flag=false;
-     for(int i=y; i<width; i++)
+     for(int i=y; i<height; i++)
          if(p_array[x][i].Used == true){
-             if((x+1) != height){
+             if((x+1) != width){
                  if(p_array[x][i].valueBool == p_array[x+1][i].valueBool ){
                      flag=true;
                      return flag;

@@ -9,7 +9,7 @@ int main()
 {
     list<int> variableAll; // все различные переменные
     list<int>::iterator it;
-    Array matrix(3,3,true); // ввод с клавиатуры
+    Array matrix(3,4,true); // ввод с клавиатуры
     //Array backup(matrix);
     variableAll=matrix.findVariableAll();
     matrix.printArray();
@@ -26,7 +26,7 @@ int main()
 
         while(currentSumAll < sumVariable){
           int first_x = matrix.findFirstElem();
-          for(int i=first_x; i<matrix.sizeHeight(); i++){
+          for(int i=first_x; i<matrix.sizeWidth(); i++){
             int first_y = matrix.findFirstElem(i);
             if(matrix.getElem(i,first_y).valueBool==true){
                 currentSumAll++;

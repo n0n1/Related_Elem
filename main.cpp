@@ -7,44 +7,41 @@ using namespace std;
 
 int main()
 {
-    list<int> variableAll; // все различные переменные
+    list<int> variables; // все различные переменные
     list<int>::iterator it;
     Array matrix(3,4,true); // ввод с клавиатуры
     //Array backup(matrix);
-    variableAll=matrix.findVariableAll();
+    variables=matrix.findVariables();
     matrix.printArray();
     cout<<"\n";
-    int sumVariable; // сумма переменных
-    int currentSumAll;
-    for(it=variableAll.begin(); it != variableAll.end();it++){
-        sumVariable = matrix.sumVar(*it);
-        currentSumAll=0; // текущая сумма
+    int variableSum;
+    int currentSum;
+    for(it=variables.begin(); it != variables.end();it++){
+        variableSum = matrix.sumVar(*it);
+        currentSum=0; // текущая сумма
         matrix.logicArray(*it);// строим логическую матрицу для эл-та.
         cout<<"for "<<"["<<*it<<"]";
-        cout << "\n sumVariable= " << sumVariable << "\n";
+        cout << "\n sumVariable= " << variableSum << "\n";
         matrix.printLogicArray();
 
-        while(currentSumAll < sumVariable){
-          int first_x = matrix.findFirstElem();
-          for(int i=first_x; i<matrix.sizeWidth(); i++){
-            int first_y = matrix.findFirstElem(i);
-            if(matrix.getElem(i,first_y).valueBool==true){
-                currentSumAll++;
-                matrix.setUsElem(i,first_y,true);
+        while(currentSum < variableSum){
+          int firstX = matrix.findFirstElem();
+          for(int i=firstX; i<matrix.sizeWidth(); i++){
+            int firstY = matrix.findFirstElem(i);
+            if(matrix.getElem(i,firstY).valueBool==true){
+                currentSum++;
+                matrix.setUsElem(i,firstY,true);
                 //currentSumAll += matrix.stepUp(i,first_y);
-                currentSumAll += matrix.stepRight(i,first_y);
-                if(matrix.isDownElem(i,first_y) == false) {
+                currentSum += matrix.stepRight(i,firstY);
+                if(matrix.isDownElem(i,firstY) == false) {
                     matrix.printRelatedArray();
                     matrix.syncRelatedArray();
                     break;
-                    cout << "\n currentSum " << currentSumAll <<'\n';
+                    cout << "\n currentSum " << currentSum <<'\n';
                 }
              }
           }
-
         }
-
-
    }
     cout << "\n Done!";
     return 0;

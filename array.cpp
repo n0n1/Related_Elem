@@ -74,7 +74,7 @@ Array::~Array()
  }
 
 //найти все различные переменные
- list<int> Array::findVariableAll()
+ list<int> Array::findVariables()
  {
      list<int> vars;
      for(int i=0; i<width; i++)
@@ -109,11 +109,11 @@ Array::~Array()
     return sum;
  }
 
- bool Array::sumstr(int ind_x)
+ bool Array::sumstr(int indX)
  {
      bool sum;
      for(int j=0; j<height; j++)
-         sum +=p_array[ind_x][j].valueBool;
+         sum +=p_array[indX][j].valueBool;
      return sum;
  }
 
@@ -132,7 +132,9 @@ Array::~Array()
  {
    int value;
    for(int j=0; j<height; j++)
-     if (p_array[x][j].valueBool == true) {value=j; break;}
+     if (p_array[x][j].valueBool == true){
+         value=j; break;
+     }
    return value;
  }
 // возвращает самый последний связной эл. в строке, относительно эл.-Y
@@ -140,7 +142,9 @@ Array::~Array()
  {
      int value;
      for(int j=y; y>=0; j--)
-      if (p_array[x][j].valueBool == false) {value = j+1; break;}
+      if (p_array[x][j].valueBool == false){
+          value = j+1; break;
+      }
      return value;
  }
  void Array::syncRelatedArray()
@@ -247,4 +251,3 @@ void Array::printRelatedArray() const
         cout << "\n";
     }
 }
-
